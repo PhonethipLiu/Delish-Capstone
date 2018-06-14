@@ -1,4 +1,4 @@
-#Delish App
+# Delish App
 
 Delish is a recipe organizer app for cooks.
 
