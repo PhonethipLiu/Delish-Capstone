@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './images/Delish-logo-01.svg';
 import './App.css';
-// import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 class App extends Component {
   render() {
     return (
