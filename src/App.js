@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import logo from './images/Delish-logo-01.svg';
+import { Button } from 'semantic-ui-react';
 import './App.css';
 import { Route } from 'react-router-dom';
 class App extends Component {
   render() {
+
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className="App-container">
+        <section className="App-background">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Recipe Box</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+            <div className="App-Intro-Btns">
+              <Button className="Btn-Shadow" size='large' role="button">Login </Button>
+              <p className="mt-3"> OR </p>
+              <Button className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
+            </div>
+        </section>
       </div>
     );
   }
