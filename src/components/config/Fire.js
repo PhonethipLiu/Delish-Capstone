@@ -1,4 +1,4 @@
-import Rebase from 're-base';
+
 import firebase from 'firebase';
 
 const config = {
@@ -9,9 +9,9 @@ const config = {
     storageBucket: "delish-d7b99.appspot.com"
   }
 
-  const app = firebase.initializeApp(config);
-  const base = Rebase.createClass(app.database())
+  const fire = firebase.initializeApp(config);
+//   const rebase = Rebase.createClass(fire.database());
+//   const User = firebase.auth().currentUser;
+//   const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 
-  export default base;
-
-  export const googleProvider = new firebase.auth.GoogleAuthProvider();
+  export default fire; /* rebase,  user; googleProvider ;*/

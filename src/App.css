@@ -1,6 +1,6 @@
 
 .App-logo {
-  width: 65%;
+  width: 70%;
   margin-top: 30%;
   z-index: 2;
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.4))
@@ -25,7 +25,7 @@
 }
 
 div.App-Intro-Btns{
-  margin-top: 30%;
+  margin-top: 45%;
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 

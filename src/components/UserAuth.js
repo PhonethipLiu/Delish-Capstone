@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './main.css';
-import LoginForm from './LoginForm';
+import LoginForm from './forms/LoginForm';
 import { Link } from 'react-router-dom';
 
 export default class Authentication extends Component {
     state = {
         authed: false,
-        user: {}
+        user: {},
+        fieldErrors: false
     }
 
     componentDidMount() {
@@ -16,7 +17,7 @@ export default class Authentication extends Component {
     // method to authenticate user
     authenticateUser = (email, password) => {
         console.log(email, password);
-        fetch('https://delish-d7b99.firebaseio.com')
+        fetch('https://delish-d7b99.firebaseio.com/user?email=${userEmail}&&password=${userPassword}`)
         .then((data)=>{
             return data.json();
         }).then((userArray)=>{

@@ -1,4 +1,5 @@
-import { googleProvider, rebase }  from '../config/constants'
+// import firebase from 'firebase';
+import rebase from 're-base';
 
 export function auth (email, pw) {
   return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw)
@@ -39,3 +40,12 @@ export function saveUser (user) {
       return user;
     })
 }
+
+// firebase.auth().onAuthStateChanged( user => {
+//   console.log(user);
+//   if (user) {
+//     this.setState({ user });
+//   } else {
+//     this.setState ({user: null});
+//   }
+// });
