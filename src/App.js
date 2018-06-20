@@ -49,8 +49,6 @@ class App extends Component {
   // }
   
 
-  // if auth
-
   authenticate = () =>{
     console.log('App: calling autheticate for google');
     // loginWithGoogle();

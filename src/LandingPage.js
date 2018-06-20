@@ -62,32 +62,35 @@ export default class LandingPage extends Component{
         cardView: true
     }
 
-    clickCard = () =>{
-        this.setState({
-            cardView: false,
-        })
-    }
+    // clickCard = () =>{
+    //     this.setState({
+    //         cardView: false,
+    //     })
+    // }
 
     changeViews = () => {
-        if(this.state.cardView){
+        // if(this.state.cardView){
             return(
                 <div className="LandingPage-Display">
                     <h1>My Recipe Collection</h1>
                     <button>+ Create New Recipe</button>
-                    <AllCards recipes={this.state.recipes} clickCard={this.clickCard}/>
+                    <AllCards recipes={this.state.recipes} 
+                    // clickCard={this.clickCard}
+                    />
                 
                 <h2> Recipe collection</h2>
                 
                 </div>
             )
-        }else{
-            return(
-                <div className="LandingPage-Display">
-                <h1>Recipe detail view</h1>
-                <RecipeDetails recipes={this.state.recipes[0]} />
-                </div>
-            )
-        }
+        // }
+        // else{
+        //     return(
+        //         <div className="LandingPage-Display">
+        //         <h1>Recipe detail view</h1>
+        //         <RecipeDetails recipes={this.state.recipes[0]} />
+        //         </div>
+        //     )
+        // }
     }
 
 
@@ -121,6 +124,7 @@ class AllCards extends Component{
             subcategory={recipe.subcategory}
             rating = {recipe.rating}
             clickCard={this.props.clickCard}
+            recipe= {recipe}
         />
     ));
     return(
@@ -128,8 +132,7 @@ class AllCards extends Component{
         {cards}
         </div>
     )
-}
-
+    }
 }
     
 
