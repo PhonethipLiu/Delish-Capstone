@@ -8,7 +8,8 @@ import logo from './images/Delish-logo-01.svg';
 import Login from './components/Login';
 import { rebase }from './components/config/Fire';
 import { loginWithGoogle, auth, saveUser } from './components/config/AuthHelpers';
-import firebase from 'firebase';
+import 'semantic-ui-css/semantic.min.css';
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -53,6 +54,9 @@ class App extends Component {
     loginWithGoogle();
   }
 
+  register(){
+    saveUser()
+  }
 
   render() {
 
@@ -70,7 +74,7 @@ class App extends Component {
                   </Link>
                   <p className="mt-3"> OR </p>
                   <Link to='/components/forms/SignUp'> 
-                  <Button onClick={() => this.authenticate('google')} className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
+                  <Button onClick={() => this.register('user')} className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
                   </Link>
               </div>
           </section>

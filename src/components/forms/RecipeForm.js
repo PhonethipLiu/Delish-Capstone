@@ -218,7 +218,7 @@ state = {
                 <label>Notes</label>
                 <Input 
                     fluid placeholder='Enter additional notes' 
-                    name="nots"
+                    name="notes"
                     type='textarea'
                     value={this.state.fields.notes}
                     onChange={this.onInputChange}
@@ -227,14 +227,14 @@ state = {
             </Form.Group>
             <Button 
                 size='mini' 
-                color='green'
+                color='yellow'
                 onClick={this.onFormSubmit}
             >
-                Update recipe                       
+                Create recipe                       
             </Button>
             <Button 
                 size='mini' 
-                color='red'
+                color='gray'
                 onClick={this.props.cancelUpdate}
             >
                 Cancel                       
