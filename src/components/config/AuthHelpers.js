@@ -1,5 +1,5 @@
-// import firebase from 'firebase';
-import rebase from 're-base';
+import { googleProvider, rebase } from './Fire'
+
 
 export function auth (email, pw) {
   return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw)
@@ -30,7 +30,7 @@ export function resetPassword (email) {
 
 export function saveUser (user) {
   console.log("save user", user);
-  return rebase.initializedApp.database().ref().child(`muusers/${user.uid}/info`)
+  return rebase.initializedApp.database().ref().child(`users/${user.uid}/info`)
     .set({
       email: user.email,
       uid: user.uid
@@ -41,11 +41,3 @@ export function saveUser (user) {
     })
 }
 
-// firebase.auth().onAuthStateChanged( user => {
-//   console.log(user);
-//   if (user) {
-//     this.setState({ user });
-//   } else {
-//     this.setState ({user: null});
-//   }
-// });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react';
 
 export default class LoginForm extends Component {
     state = {
@@ -48,6 +48,7 @@ export default class LoginForm extends Component {
                   <label>Email</label>
                   <span style={{color: "red"}}>{this.state.fieldErrors.email}</span>
                   <input 
+                    value={this.state.email}
                     name = 'email'
                     placeholder = 'Email' 
                     type = 'email'
@@ -59,6 +60,7 @@ export default class LoginForm extends Component {
                   <label>Password</label>
                   <span style={{color: "red"}}>{this.state.fieldErrors.password}</span>
                   <input 
+                  value={this.state.password}
                     name = 'password'
                     placeholder = 'Password' 
                     onChange = {this.onInputChange}

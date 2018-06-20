@@ -5,35 +5,53 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import logo from './images/Delish-logo-01.svg';
-import LoginForm from './components/forms/LoginForm';
-import { fire }  from './components/config/Fire';
+import Login from './components/Login';
+import { rebase }from './components/config/Fire';
+import { loginWithGoogle, auth, saveUser } from './components/config/AuthHelpers';
 import firebase from 'firebase';
-
 class App extends Component {
   constructor(props){
     super(props);
-    this.state= {
-      user: {},
+    this.state = {
+      authed: false,
+      loading: true,
+      uid: null,
+      img: null,
     }
-  }
+
+    this.authenticate = this.authenticate.bind(this);
+  } 
 
   componentDidMount() {
-    this.authListener();
-  }
-
-  authListener() {
-    fire.auth().onAuthStateChanged( user => {
-      console.log(user);
-      if (user) {
-        this.setState({ user });
-      } else {
-        this.setState ({ user: null });
-      }
-    });  
-  }
- 
+    this.authListener = rebase.initializedApp.auth().onAuthStateChanged((user) => {
   
+      if (user) {
+        this.setState({
+          authed: true,
+          loading: false,
+          uid: user.uid,
+          image: user.img,
+        });
+        //get DB stuff for user here
+      } else {
+        this.setState({
+          authed: false,
+          loading: false,
+          uid: null,
+          img: null,
+        })
+      }
+    })
+  }
 
+  componentWillMount (){
+    this.authListener
+  }
+  
+  authenticate(){
+    console.log('App: calling autheticate for google');
+    loginWithGoogle();
+  }
 
 
   render() {
@@ -41,18 +59,21 @@ class App extends Component {
     return (
       <div className="App-container" >
 
-        {this.state.user ? (<LandingPage />) : (<LoginForm />)}
-
 
         <section className="App-background">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1 className="App-title">Recipe Box</h1>
-                    <div className="App-Intro-Btns">
-                        <Button as={Link} to='LoginForm' className="Btn-Shadow" size='large' role="button">Login </Button>
-                        <p className="mt-3"> OR </p>
-                        <Button as={Link} to="/components/forms/LoginForm" className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
-                    </div>
-            </section>
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Recipe Collection</h1>
+              <div className="App-Intro-Btns">
+                  {/* <Login className="Btn-Shadow" size='large' role="button" /> */}
+                  <Link to='/components/forms/LoginForm'> 
+                    <Button onClick={() => this.authenticate('google')}  className="Btn-Shadow" size='large' role="button">Login </Button>
+                  </Link>
+                  <p className="mt-3"> OR </p>
+                  <Link to='/components/forms/SignUp'> 
+                  <Button onClick={() => this.authenticate('google')} className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
+                  </Link>
+              </div>
+          </section>
         
         
         {/* use this code if you want to pass props */}

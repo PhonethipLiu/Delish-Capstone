@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
 import './LandingPage.css';
-import { Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import logo from './images/Delish-logo-01.svg';
+// import { Button } from 'semantic-ui-react';
+// import { Link } from 'react-router-dom';
+// import logo from './images/Delish-logo-01.svg';
 
 // Accepts forms as props from App.js
 export default class LandingPage extends Component{
 
-    constructor(props){
-        super(props);
-    }
+    // constructor(props){
+    //     super(props);
+    // }
 
 
     render(){
         return(
             <div className="Landing-container">
-            {/* <section className="Landing-background">
-                <img src={logo} className="Landing-logo" alt="logo" />
-                <h1 className="Landing-title">Recipe Box</h1>
-                    <div className="Landing-Intro-Btns">
-                        <Button className="Btn-Shadow" size='large' role="button">Login </Button>
-                        <p className="mt-3"> OR </p>
-                        <Button className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
-                    </div>
-            </section> */}
+            
             <h2>Landing Page for user Recipe collection</h2>
             {/* <LandingLogin forms={this.props.forms} /> */}
             </div>
@@ -33,7 +25,7 @@ export default class LandingPage extends Component{
     
 
 
-// Create all of the list items.
+// Create all of the recipe card items.
 // Accepts props: id, route, title, description
 // class LandingLogin extends Component{
 //   render() {

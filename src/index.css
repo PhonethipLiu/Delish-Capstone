@@ -5,12 +5,24 @@ body {
   font-weight: 400;
 }
 
-.hed {
-  font-weight: 900px;
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
 }
 
+.hed {
+  font-weight: 500px;
+}
 
 .subhed {
-  font-weight: 700px;
+  font-weight: 300px;
 }
 
+/* FORMS */
+label {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: .7rem;
+  word-spacing: .1rem;
+  padding-top: 10rem;
+}

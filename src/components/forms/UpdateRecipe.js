@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
-import { Form, Input, Button } from 'semantic-ui-react'
+import { Form, Input, Button } from 'semantic-ui-react';
+import '../../index.css'
 
-export default class RecipeForm extends Component{
+/**
+ * UpdateRecipe should appear when user clicks on the edit recipe link
+ */
+
+
+export default class UpdateRecipe extends Component{
 state = {
     fields: {
       category: '',
@@ -63,11 +69,12 @@ state = {
     const fields= Object.assign({}, this.state.fields);
     fields[evt.target.name] = evt.target.value;
     this.setState({fields});
-  };
+  }
+
   render() {
     return (
-      <div>
-        <h3>{this.props.title}</h3>
+      <div className="Form-recipe">
+        <h3>Update {this.props.title} recipe</h3>
          <Form>
             <Form.Group widths='equal'>
             <Form.Field>
