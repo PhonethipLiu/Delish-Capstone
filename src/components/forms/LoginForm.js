@@ -68,8 +68,6 @@ export default class LoginForm extends Component {
                   />
                 </Form.Field>
                 
-                
-                
                 <Button type='submit'>Submit</Button>
               </Form>
             )

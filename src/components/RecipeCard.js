@@ -7,17 +7,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 const RecipeCard = (props) => {
   return (
     <div>
-      <Card>
+      <Card className="Card-Recipe">
         <CardBody>
           <CardTitle>{props.title}</CardTitle>
-          <CardSubtitle>{props.category}: {props.subcategory}</CardSubtitle>
+          <CardSubtitle><strong>{props.category}</strong>: {props.subcategory}</CardSubtitle>
         </CardBody>
         <img width="100%" src={props.image} alt="Recipe Card image" />
         <CardBody>
-          <CardText>Source: {props.source}</CardText>
-          <CardText>Rating: {props.rating} | Status: {props.status}</CardText>
-          <CardText>Status: {props.notes}</CardText>
-          <CardLink to="/components/RecipeDetails">Recipe details</CardLink>
+          <CardText ><strong>Source:</strong> {props.source}</CardText>
+          <CardText><strong>Rating:</strong> {props.rating} &ensp; | &ensp; Status: {props.status}</CardText>
+          <CardText><strong>Status:</strong> {props.notes} </CardText>
+          <CardLink  onClick={props.clickCard} >Recipe details</CardLink>
           <CardLink to="/components/UpdateRecipe">Edit Recipe</CardLink>
         </CardBody>
       </Card>
@@ -26,3 +26,4 @@ const RecipeCard = (props) => {
 };
 
 export default RecipeCard;
+

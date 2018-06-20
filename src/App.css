@@ -6,7 +6,7 @@
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.4))
 }
 
-.App-container {
+.App-background{
   color: white;
   text-align: center;
 }
@@ -24,6 +24,7 @@
   left: 0;
 }
 
+
 div.App-Intro-Btns{
   margin-top: 45%;
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
@@ -37,10 +38,11 @@ div.App-Intro-Btns{
 
 .App-title {
   font-size: 1.2rem;
-  letter-spacing: .5rem;
+  letter-spacing: .2rem;
   text-transform: uppercase;
-  padding-top: .6rem;
+  padding-top: .5rem;
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+  /* color: white; */
 }
 
 .App-intro {

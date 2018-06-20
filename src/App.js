@@ -11,59 +11,61 @@ import { loginWithGoogle, auth, saveUser } from './components/config/AuthHelpers
 import 'semantic-ui-css/semantic.min.css';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
+  state = {
       authed: false,
       loading: true,
-      uid: null,
+      user: {
+        id: 1,
+        name: "Phil",
+        email: "this@that.com",
+      },
       img: null,
     }
 
-    this.authenticate = this.authenticate.bind(this);
-  } 
-
   componentDidMount() {
-    this.authListener = rebase.initializedApp.auth().onAuthStateChanged((user) => {
+  //   this.authListener = rebase.initializedApp.auth().onAuthStateChanged((user) => {
   
-      if (user) {
-        this.setState({
-          authed: true,
-          loading: false,
-          uid: user.uid,
-          image: user.img,
-        });
-        //get DB stuff for user here
-      } else {
-        this.setState({
-          authed: false,
-          loading: false,
-          uid: null,
-          img: null,
-        })
-      }
+  //     if (user) {
+  //       this.setState({
+  //         authed: true,
+  //         loading: false,
+  //         uid: user.uid,
+  //         image: user.img,
+  //       });
+  //       //get DB stuff for user here
+  //     } else {
+  //       this.setState({
+  //         authed: false,
+  //         loading: false,
+  //         uid: null,
+  //         img: null,
+  //       })
+  //     }
+  //   })
+  }
+
+  // componentWillMount (){
+  //   this.authListener
+  // }
+  
+
+  // if auth
+
+  authenticate = () =>{
+    console.log('App: calling autheticate for google');
+    // loginWithGoogle();
+    this.setState({
+      authed: true,
     })
   }
 
-  componentWillMount (){
-    this.authListener
-  }
-  
-  authenticate(){
-    console.log('App: calling autheticate for google');
-    loginWithGoogle();
-  }
-
-  register(){
-    saveUser()
-  }
-
-  render() {
-
-    return (
-      <div className="App-container" >
-
-
+  changeViews = () =>{
+    if(this.state.authed){
+      return(
+          <LandingPage user={this.state.user}/>
+      )
+    }else{
+      return(
         <section className="App-background">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Recipe Collection</h1>
@@ -78,6 +80,21 @@ class App extends Component {
                   </Link>
               </div>
           </section>
+      )
+    }
+  }
+
+  register = () =>{
+    saveUser()
+  }
+
+  render() {
+
+    return (
+      <div className="App-container" >
+
+
+        {this.changeViews()}
         
         
         {/* use this code if you want to pass props */}
