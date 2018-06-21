@@ -1,53 +1,57 @@
 import React, {Component} from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
-import '../../index.css'
+import '../../index.css';
+import 'semantic-ui-css/semantic.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import ReactDOM from 'react-dom';
 
 /**
- * UpdateRecipe should appear when user clicks on the edit recipe link
+ * UpdateRecipe should appear when user clicks on the edit fields link
  */
 
 
 export default class UpdateRecipe extends Component{
-state = {
-    fields: {
-      category: '',
-      subCategory: '',
-      title: '',
-      image: '',
-      source: '',
-      instruction: '',
-      snapshot: '',
-      status: '',
-      rating: '',
-      level: '',
-      serving: '',
-      tags: '',
-      notes: '',
-    }
-  };
-  onFormSubmit = (evt, action) => {
-    let userObject = {}
-    userObject.catergory = this.state.fields.category;
-    userObject.subCatergory = this.state.fields.subCategory;
-    userObject.title = this.state.fields.title;
-    userObject.image = this.state.fields.image;
-    userObject.source = this.state.fields.source;
-    userObject.instruction = this.state.fields.instruction;
-    userObject.snapshot = this.state.fields.snapshot;
-    userObject.status = this.state.fields.status;
-    userObject.rating = this.state.fields.rating;
-    userObject.level =  this.state.fields.level;
-    userObject.serving = this.state.fields.serving;
-    userObject.tags = this.state.fields.tags;
-    userObject.notes = this.state.fields.notes;
-    this.props.saveUpdate(userObject);
-
-    console.log("userObject", userObject);
+    state = {
+        fields: {
+            category: this.props.recipe.category || '',
+            subcategory: this.props.recipe.subcategory ||  '',
+            title: this.props.recipe.title || '',
+            image: this.props.recipe.image || '',
+            source: this.props.recipe.source || '',
+            instruction: this.props.recipe.instruction || '',
+            snapshot: this.props.recipe.snapshot ||  '',
+            status: this.props.recipe.status ||  '',
+            rating: this.props.recipe.rating || '',
+            level: this.props.recipe.level || '',
+            serving: this.props.recipe.serving || '',
+            tags: this.props.recipe.tags || '',
+            notes: this.props.recipe.notes || '',
+        },
+        recipeErrors: {},
+  }
+  
+  onFormSubmit = evt => {
+      console.log("What is onFormSubmit ()", this.props);
+    const category = this.state.fields.category;
+    const subcategory = this.state.fields.subcategory;
+    const title = this.state.fields.title;
+    const image = this.state.fields.image;
+    const source = this.state.fields.source;
+    const instruction = this.state.fields.instruction;
+    const snapshot = this.state.fields.snapshot;
+    const status = this.state.fields.status;
+    const rating = this.state.fields.rating;
+    const level =  this.state.fields.level;
+    const serving = this.state.fields.serving;
+    const tags = this.state.fields.tags;
+    const notes = this.state.fields.notes;
+   
+    this.props.saveUpdate();
 
     this.setState({
         fields: {
             category: '',
-            subCategory: '',
+            subcategory: '',
             title: '',
             image: '',
             source: '',
@@ -61,7 +65,6 @@ state = {
             notes: '',
           }
     });
-
     evt.preventDefault();
   };
 
@@ -73,8 +76,8 @@ state = {
 
   render() {
     return (
-      <div className="Form-recipe">
-        <h3>Update {this.props.title} recipe</h3>
+      <div className="Form-fields">
+        <h3>Edit your fields</h3>
          <Form>
             <Form.Group widths='equal'>
             <Form.Field>
@@ -90,9 +93,9 @@ state = {
                 <label>Update Sub-category</label>
                 <Input 
                     fluid placeholder='Sub-category' 
-                    name="subCategory"
+                    name="subcategory"
                     type='text'
-                    value={this.state.fields.subCategory}
+                    value={this.state.fields.subcategory}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -113,7 +116,7 @@ state = {
                 <Input 
                     fluid placeholder='Image' 
                     name="image"
-                    type='image'
+                    type='text'
                     value={this.state.fields.image}
                     onChange={this.onInputChange}
                 />
@@ -133,7 +136,7 @@ state = {
             <Form.Field>
                 <label>Update Instruction</label>
                 <Input 
-                    fluid placeholder='Enter recipe instructions' 
+                    fluid placeholder='Enter fields instructions' 
                     name="instruction"
                     type='textarea'
                     value={this.state.fields.instruction}
@@ -145,7 +148,7 @@ state = {
             <Form.Field>
                 <label>Update snapshot</label>
                 <Input 
-                    fluid placeholder='Upload image of recipe instructions' 
+                    fluid placeholder='Upload image of fields instructions' 
                     name="snapshot"
                     type='image'
                     value={this.state.fields.snapshot}
@@ -181,7 +184,7 @@ state = {
             <Form.Field>
                 <label>Update Level</label>
                 <Input 
-                    fluid placeholder='Level of easy to make the recipe' 
+                    fluid placeholder='Level of easy to make the fields' 
                     name="level"
                     type='text'
                     value={this.state.fields.level}
@@ -227,14 +230,14 @@ state = {
             </Form.Group>
             <Button 
                 size='mini' 
-                color='green'
+                color='yellow'
                 onClick={this.onFormSubmit}
             >
-                Update recipe                       
+               Save                       
             </Button>
             <Button 
                 size='mini' 
-                color='red'
+                color='grey'
                 onClick={this.props.cancelUpdate}
             >
                 Cancel                       

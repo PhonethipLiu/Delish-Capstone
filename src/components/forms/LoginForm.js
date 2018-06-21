@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 export default class LoginForm extends Component {
     state = {
@@ -66,8 +67,6 @@ export default class LoginForm extends Component {
                     onChange = {this.onInputChange}
                   />
                 </Form.Field>
-                
-                
                 
                 <Button type='submit'>Submit</Button>
               </Form>

@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
-import '../../index.css'
+import '../../index.css';
+import 'semantic-ui-css/semantic.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 /**
  * RecipeForm should appear when user clicks on the create recipe button
  */
 
-
 export default class RecipeForm extends Component{
 state = {
-    fields: {
+   recipe: {
       category: '',
-      subCategory: '',
+      subcategory: '',
       title: '',
       image: '',
       source: '',
@@ -27,27 +28,27 @@ state = {
   };
   onFormSubmit = (evt, action) => {
     let userObject = {}
-    userObject.catergory = this.state.fields.category;
-    userObject.subCatergory = this.state.fields.subCategory;
-    userObject.title = this.state.fields.title;
-    userObject.image = this.state.fields.image;
-    userObject.source = this.state.fields.source;
-    userObject.instruction = this.state.fields.instruction;
-    userObject.snapshot = this.state.fields.snapshot;
-    userObject.status = this.state.fields.status;
-    userObject.rating = this.state.fields.rating;
-    userObject.level =  this.state.fields.level;
-    userObject.serving = this.state.fields.serving;
-    userObject.tags = this.state.fields.tags;
-    userObject.notes = this.state.fields.notes;
-    this.props.saveUpdate(userObject);
+    userObject.catergory = this.state.recipe.category;
+    userObject.subCatergory = this.state.recipe.subcategory;
+    userObject.title = this.state.recipe.title;
+    userObject.image = this.state.recipe.image;
+    userObject.source = this.state.recipe.source;
+    userObject.instruction = this.state.recipe.instruction;
+    userObject.snapshot = this.state.recipe.snapshot;
+    userObject.status = this.state.recipe.status;
+    userObject.rating = this.state.recipe.rating;
+    userObject.level =  this.state.recipe.level;
+    userObject.serving = this.state.recipe.serving;
+    userObject.tags = this.state.recipe.tags;
+    userObject.notes = this.state.recipe.notes;
+    this.props.createNewRecipe(userObject);
 
     console.log("userObject", userObject);
 
     this.setState({
-        fields: {
+        recipe: {
             category: '',
-            subCategory: '',
+            subcategory: '',
             title: '',
             image: '',
             source: '',
@@ -66,9 +67,9 @@ state = {
   };
 
   onInputChange = evt => {
-    const fields= Object.assign({}, this.state.fields);
-    fields[evt.target.name] = evt.target.value;
-    this.setState({fields});
+    const recipe= Object.assign({}, this.state.recipe);
+    recipe[evt.target.name] = evt.target.value;
+    this.setState({recipe});
   }
 
   render() {
@@ -82,7 +83,7 @@ state = {
                 <Input 
                     fluid placeholder='Category' 
                     name="category"
-                    value={this.state.fields.category}
+                    value={this.state.recipe.category}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -90,9 +91,9 @@ state = {
                 <label>Sub-category</label>
                 <Input 
                     fluid placeholder='Sub-category' 
-                    name="subCategory"
+                    name="subcategory"
                     type='text'
-                    value={this.state.fields.subCategory}
+                    value={this.state.recipe.subcategory}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -104,7 +105,7 @@ state = {
                     fluid placeholder='Title' 
                     name="title"
                     type='text'
-                    value={this.state.fields.title}
+                    value={this.state.recipe.title}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -113,8 +114,8 @@ state = {
                 <Input 
                     fluid placeholder='Image' 
                     name="image"
-                    type='image'
-                    value={this.state.fields.image}
+                    type='text'
+                    value={this.state.recipe.image}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -126,7 +127,7 @@ state = {
                     fluid placeholder='Source url' 
                     name="source"
                     type='text'
-                    value={this.state.fields.source}
+                    value={this.state.recipe.source}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -136,23 +137,25 @@ state = {
                     fluid placeholder='Enter recipe instructions' 
                     name="instruction"
                     type='textarea'
-                    value={this.state.fields.instruction}
+                    value={this.state.recipe.instruction}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
             </Form.Group>
-            <Form.Group widths='equal'>
+
+            {/* <Form.Group widths='equal'>
             <Form.Field>
                 <label>Snapshot</label>
                 <Input 
                     fluid placeholder='Upload image of recipe instructions' 
                     name="snapshot"
                     type='image'
-                    value={this.state.fields.snapshot}
+                    value={this.state.recipe.snapshot}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
-            </Form.Group>
+            </Form.Group> */}
+
             <Form.Group widths='equal'>
             <Form.Field>
                 <label>Recipe Status</label>
@@ -160,7 +163,7 @@ state = {
                     fluid placeholder='Recipe status' 
                     name="status"
                     type='text'
-                    value={this.state.fields.status}
+                    value={this.state.recipe.status}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -172,7 +175,7 @@ state = {
                     fluid placeholder='Enter a number 1-5 scale; 1= lowest rating & 5 being the highest rating' 
                     name="rating"
                     type='number'
-                    value={this.state.fields.rating}
+                    value={this.state.recipe.rating}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -184,7 +187,7 @@ state = {
                     fluid placeholder='Level of easy to make the recipe' 
                     name="level"
                     type='text'
-                    value={this.state.fields.level}
+                    value={this.state.recipe.level}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -196,7 +199,7 @@ state = {
                     fluid placeholder='Serving amount' 
                     name="serving"
                     type='text'
-                    value={this.state.fields.serving}
+                    value={this.state.recipe.serving}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -208,7 +211,7 @@ state = {
                     fluid placeholder='Enter keyword tags' 
                     name="tags"
                     type='text'
-                    value={this.state.fields.tags}
+                    value={this.state.recipe.tags}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
@@ -218,23 +221,23 @@ state = {
                 <label>Notes</label>
                 <Input 
                     fluid placeholder='Enter additional notes' 
-                    name="nots"
+                    name="notes"
                     type='textarea'
-                    value={this.state.fields.notes}
+                    value={this.state.recipe.notes}
                     onChange={this.onInputChange}
                 />
             </Form.Field>
             </Form.Group>
             <Button 
                 size='mini' 
-                color='green'
+                color='yellow'
                 onClick={this.onFormSubmit}
             >
-                Update recipe                       
+                Create recipe                       
             </Button>
             <Button 
                 size='mini' 
-                color='red'
+                color='grey'
                 onClick={this.props.cancelUpdate}
             >
                 Cancel                       

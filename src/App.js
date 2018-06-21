@@ -1,79 +1,138 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import './App.css';
-// import { Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import logo from './images/Delish-logo-01.svg';
-import Login from './components/Login';
+import LoginForm from './components/forms/LoginForm';
 import { rebase }from './components/config/Fire';
-import { loginWithGoogle, auth, saveUser } from './components/config/AuthHelpers';
-import firebase from 'firebase';
+import { loginWithGoogle, auth, saveUser, login, logout } from './components/config/AuthHelpers';
+import 'semantic-ui-css/semantic.min.css';
+
+
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
+  state = {
       authed: false,
       loading: true,
-      uid: null,
-      img: null,
+      user: null,
+      /* Use for developement */
+      // user: {
+      //   id: 1,
+      //   name: "Phil",
+      //   email: "this@that.com",
+      // },
     }
 
-    this.authenticate = this.authenticate.bind(this);
-  } 
-
-  componentDidMount() {
-    this.authListener = rebase.initializedApp.auth().onAuthStateChanged((user) => {
+  // firebase loging auth
+  // componentDidMount = ()=> {
+    authListener = ()=> {
+      rebase.initializedApp.auth().onAuthStateChanged((user) => {
   
       if (user) {
         this.setState({
           authed: true,
           loading: false,
-          uid: user.uid,
-          image: user.img,
+          user: user,
         });
+        
         //get DB stuff for user here
       } else {
         this.setState({
           authed: false,
           loading: false,
-          uid: null,
-          img: null,
-        })
+          user: null,
+        });
+        // this.auth();
       }
     })
   }
 
-  componentWillMount (){
-    this.authListener
+
+  componentWillMount =()=>{
+    this.authListener()
   }
   
-  authenticate(){
-    console.log('App: calling autheticate for google');
-    loginWithGoogle();
+  /* Firebase rebase */
+
+  
+
+  //  auth = (email, pw) => {
+  //   return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw)
+  //     .then((data) => {
+  //       console.log("data is", data);
+  //       this.saveUser(data);
+  //     })
+  // }
+
+  // logout = () => {
+  //   return rebase.initializedApp.auth().signOut()
+  // }
+  
+  // login = (email, pw) => {
+  //   return rebase.initializedApp.auth().signInWithEmailAndPassword(email, pw)
+  // }
+  
+
+  authenticate = () =>{
+    loginWithGoogle()
+  
+    // this.auth();
+    /* for development set user */
+    // this.setState({
+    //   authed: true,
+    // })
   }
 
+ // register = () =>{
+  //   this.authListener()
+  // }
 
-  render() {
+signOut = () => {
+  auth.logout()
+  .then(() => {
+    this.setState ({
+      user: null,
+    });
+  });
+}
 
-    return (
-      <div className="App-container" >
+  changeViews = () => {
+    console.log("what is changeViews state", this.state);
 
-
+    if(this.state.authed){
+      console.log("what is state?", this.state);
+      return(
+          <LandingPage user={this.state.user}/>
+      )
+    }else{
+      console.log("changeViews: Else state");
+      return(
         <section className="App-background">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Recipe Collection</h1>
               <div className="App-Intro-Btns">
                   {/* <Login className="Btn-Shadow" size='large' role="button" /> */}
                   <Link to='/components/forms/LoginForm'> 
-                    <Button onClick={() => this.authenticate('google')}  className="Btn-Shadow" size='large' role="button">Login </Button>
+                    <Button onClick={() => this.authenticate('google')}className="Btn-Shadow" size='large' role="button">Login </Button>
                   </Link>
                   <p className="mt-3"> OR </p>
                   <Link to='/components/forms/SignUp'> 
-                  <Button onClick={() => this.authenticate('google')} className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
+                  <Button onClick={() => this.signOut('user')} className="Btn-Shadow"  size='large' role="button"> Logout</Button>
                   </Link>
               </div>
           </section>
+      )
+    }
+  }
+
+ 
+
+  render() {
+
+    return (
+      <div className="App-container" >
+
+        {this.changeViews()}
         
         
         {/* use this code if you want to pass props */}
