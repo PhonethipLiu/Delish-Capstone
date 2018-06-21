@@ -41,7 +41,7 @@ state = {
     userObject.serving = this.state.recipe.serving;
     userObject.tags = this.state.recipe.tags;
     userObject.notes = this.state.recipe.notes;
-    this.props.saveUpdate(userObject);
+    this.props.createNewRecipe(userObject);
 
     console.log("userObject", userObject);
 
@@ -114,7 +114,7 @@ state = {
                 <Input 
                     fluid placeholder='Image' 
                     name="image"
-                    type='image'
+                    type='text'
                     value={this.state.recipe.image}
                     onChange={this.onInputChange}
                 />
@@ -142,7 +142,8 @@ state = {
                 />
             </Form.Field>
             </Form.Group>
-            <Form.Group widths='equal'>
+
+            {/* <Form.Group widths='equal'>
             <Form.Field>
                 <label>Snapshot</label>
                 <Input 
@@ -153,7 +154,8 @@ state = {
                     onChange={this.onInputChange}
                 />
             </Form.Field>
-            </Form.Group>
+            </Form.Group> */}
+
             <Form.Group widths='equal'>
             <Form.Field>
                 <label>Recipe Status</label>

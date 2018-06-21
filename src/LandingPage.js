@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import RecipeCard from './components/RecipeCard';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-// import { loginWithGoogle, auth, saveUser, login } from './components/config/AuthHelpers';
+import { saveRecipe, auth, saveUser, login } from './components/config/AuthHelpers';
 import { rebase }from './components/config/Fire';
 import RecipeForm from './components/forms/RecipeForm';
 
@@ -13,7 +13,7 @@ import RecipeForm from './components/forms/RecipeForm';
 export default class LandingPage extends Component{
     
     state = {
-        user: this.props.user,
+        user: {},
         cardView: true,
         recipes: [],
         /* Use recipes objects below for development */
@@ -70,7 +70,18 @@ export default class LandingPage extends Component{
     
     }
   
-
+    componentDidMount(){
+        const stored = sessionStorage.getItem('user');
+        console.log("Stored:", stored);
+        
+        if (stored){
+            const parseDB = JSON.parse(stored);
+            console.log("parseDB", parseDB);
+            this.setState({
+                user: parseDB
+            })
+        }
+    }
     // saveUpdate = () =>{
     //     this.setState({
     //         edit: true,
@@ -81,6 +92,12 @@ export default class LandingPage extends Component{
         this.setState({
             cardView: false,
         })
+    }
+
+    createNewRecipe =(recipeObj)=> {
+        console.log("Wha it recipeObj", recipeObj)
+        this.handleAddRecipe(recipeObj);
+       
     }
 
     saveUpdate = () => {
@@ -95,9 +112,20 @@ export default class LandingPage extends Component{
       }
 
       handleAddRecipe = (newRecipe) => {
+          console.log("what is handleAddRecipe", newRecipe)
+          var newArray = this.state.recipes.concat(newRecipe)
         this.setState({
-            recipes: this.state.recipes.concat([newRecipe])
-          });
+            recipes: newArray
+          }, this.checkState(newRecipe));
+        }
+
+        // Ultility function to check state
+        checkState = (newRecipe) => {
+            console.log("what is the state", this.state)
+            saveRecipe(this.state.user, newRecipe);
+        this.setState({
+            cardView: true,
+        });
         }
       
       handleRemoveRecipe = (index) => {
@@ -126,7 +154,7 @@ export default class LandingPage extends Component{
                 <div className="LandingPage-Display">
                         <h1>My Recipe Collection</h1>
                         <a className="Btn-Create" onClick={this.openCreateRecipe} >+ Create New Recipe</a>
-                        <RecipeForm saveUpdate={this.saveUpdate} 
+                        <RecipeForm createNewRecipe={this.createNewRecipe} 
                         />
                      </div>
             )

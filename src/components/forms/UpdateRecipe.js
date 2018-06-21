@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'semantic-ui-react';
 import '../../index.css';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import ReactDOM from 'react-dom';
 
 /**
  * UpdateRecipe should appear when user clicks on the edit fields link
@@ -115,7 +116,7 @@ export default class UpdateRecipe extends Component{
                 <Input 
                     fluid placeholder='Image' 
                     name="image"
-                    type='image'
+                    type='text'
                     value={this.state.fields.image}
                     onChange={this.onInputChange}
                 />

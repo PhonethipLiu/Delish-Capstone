@@ -29,15 +29,36 @@ export function resetPassword (email) {
 }
 
 export function saveUser (user) {
-  console.log("save user", user);
+  // console.log("save user", user);
   return rebase.initializedApp.database().ref().child(`users/${user.uid}/info`)
     .set({
       email: user.email,
       uid: user.uid,
     })
     .then(() => {
-      
+      const userObj = JSON.stringify(user);
+            sessionStorage.setItem('user', userObj);
       return user;
     })
 }
 
+export function saveRecipe (user, recipeObj) {
+  console.log("save user and recipeObj", user, recipeObj);
+  recipeObj.uid = user.uid;
+  return rebase.initializedApp.database().ref(`recipes`)
+    .push(recipeObj)
+    .then(() => {
+      
+      // return recipeObj;
+    })
+}
+
+export function updateRecipe (user, recipeObj) {
+  console.log("save user and recipeObj", user, recipeObj);
+  return rebase.initializedApp.database().ref(`recipes`)
+    .push(recipeObj)
+    .then(() => {
+      
+      // return recipeObj;
+    })
+}
