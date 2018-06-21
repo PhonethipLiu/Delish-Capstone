@@ -31,22 +31,23 @@ export default class UpdateRecipe extends Component{
   }
   
   onFormSubmit = evt => {
-      console.log("What is onFormSubmit ()", this.props);
-    const category = this.state.fields.category;
-    const subcategory = this.state.fields.subcategory;
-    const title = this.state.fields.title;
-    const image = this.state.fields.image;
-    const source = this.state.fields.source;
-    const instruction = this.state.fields.instruction;
-    const snapshot = this.state.fields.snapshot;
-    const status = this.state.fields.status;
-    const rating = this.state.fields.rating;
-    const level =  this.state.fields.level;
-    const serving = this.state.fields.serving;
-    const tags = this.state.fields.tags;
-    const notes = this.state.fields.notes;
+    console.log("What is onFormSubmit ()", this.props);
+    let userObject = {}
+    userObject.category = this.state.fields.category;
+    userObject.subcategory = this.state.fields.subcategory;
+    userObject.title = this.state.fields.title;
+    userObject.image = this.state.fields.image;
+    userObject.source = this.state.fields.source;
+    userObject.instruction = this.state.fields.instruction;
+    userObject.snapshot = this.state.fields.snapshot;
+    userObject.status = this.state.fields.status;
+    userObject.rating = this.state.fields.rating;
+    userObject.level =  this.state.fields.level;
+    userObject.serving = this.state.fields.serving;
+    userObject.tags = this.state.fields.tags;
+    userObject.notes = this.state.fields.notes;
    
-    this.props.saveUpdate();
+    this.props.saveUpdate(userObject);
 
     this.setState({
         fields: {
@@ -144,7 +145,8 @@ export default class UpdateRecipe extends Component{
                 />
             </Form.Field>
             </Form.Group>
-            <Form.Group widths='equal'>
+
+            {/* <Form.Group widths='equal'>
             <Form.Field>
                 <label>Update snapshot</label>
                 <Input 
@@ -156,6 +158,7 @@ export default class UpdateRecipe extends Component{
                 />
             </Form.Field>
             </Form.Group>
+             */}
             <Form.Group widths='equal'>
             <Form.Field>
                 <label>Update Recipe Status</label>
@@ -221,8 +224,8 @@ export default class UpdateRecipe extends Component{
                 <label>Update Notes</label>
                 <Input 
                     fluid placeholder='Enter additional notes' 
-                    name="nots"
-                    type='textarea'
+                    name="notes"
+                    type='text'
                     value={this.state.fields.notes}
                     onChange={this.onInputChange}
                 />

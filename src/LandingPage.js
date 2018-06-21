@@ -71,21 +71,16 @@ export default class LandingPage extends Component{
     }
   
     componentDidMount(){
-        const stored = sessionStorage.getItem('user');
-        console.log("Stored:", stored);
-        
-        if (stored){
-            const parseDB = JSON.parse(stored);
-            console.log("parseDB", parseDB);
-            this.setState({
-                user: parseDB
-            })
-        }
+        this.saveUpdate();
     }
-    // saveUpdate = () =>{
-    //     this.setState({
-    //         edit: true,
-    //     })
+ 
+    // syncFB = () => {
+    //     this.ref = rebase.syncState(`recipe`,
+    //     {
+    //         context: this,
+    //         state: 'recipes',
+    //         asArray: true,
+    //     });
     // }
 
     openCreateRecipe = () => {
@@ -101,15 +96,12 @@ export default class LandingPage extends Component{
     }
 
     saveUpdate = () => {
-        this.ref = rebase.syncState('items', {
+        this.ref = rebase.syncState('recipes', {
             context: this,
             state: 'recipes',
-            asArray: true,
-            then() {
-              this.setState({ loading: false });
-            }
-        })
-      }
+            asArray: true, 
+        });
+    }
 
       handleAddRecipe = (newRecipe) => {
           console.log("what is handleAddRecipe", newRecipe)
@@ -122,10 +114,11 @@ export default class LandingPage extends Component{
         // Ultility function to check state
         checkState = (newRecipe) => {
             console.log("what is the state", this.state)
-            saveRecipe(this.state.user, newRecipe);
-        this.setState({
+            saveRecipe(this.props.user, newRecipe);
+            this.setState({
             cardView: true,
         });
+        this.saveUpdate()
         }
       
       handleRemoveRecipe = (index) => {
@@ -137,14 +130,14 @@ export default class LandingPage extends Component{
       }
 
     changeViews = () => {
-
+        console.log("is there a user prop?", this.props.user)
         if(this.state.cardView){
             
             return(
                 <div className="LandingPage-Display">
                     <h1>My Recipe Collection</h1>
                     <a className="Btn-Create" onClick={this.openCreateRecipe}> + Create New Recipe </a>
-                    <AllCards recipes={this.state.recipes} />
+                    <AllCards recipes={this.state.recipes} saveUpdate ={this.saveUpdate} />
                    
                 </div>
             )
@@ -154,7 +147,7 @@ export default class LandingPage extends Component{
                 <div className="LandingPage-Display">
                         <h1>My Recipe Collection</h1>
                         <a className="Btn-Create" onClick={this.openCreateRecipe} >+ Create New Recipe</a>
-                        <RecipeForm createNewRecipe={this.createNewRecipe} 
+                        <RecipeForm createNewRecipe={this.createNewRecipe} saveUpdate ={this.saveUpdate}
                         />
                      </div>
             )

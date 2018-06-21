@@ -45,6 +45,7 @@ export function saveUser (user) {
 export function saveRecipe (user, recipeObj) {
   console.log("save user and recipeObj", user, recipeObj);
   recipeObj.uid = user.uid;
+  console.log("what is the user uid?", user.uid);
   return rebase.initializedApp.database().ref(`recipes`)
     .push(recipeObj)
     .then(() => {
@@ -62,3 +63,9 @@ export function updateRecipe (user, recipeObj) {
       // return recipeObj;
     })
 }
+
+// export function getUserRecipe () {
+//   console.log("What is getUserRecipe" );
+//   fetch(`https://delish-d7b99.firebaseio.com/recipes.json`)
+//   .then((data)
+// }

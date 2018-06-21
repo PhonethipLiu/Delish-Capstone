@@ -36,11 +36,11 @@ class RecipeCard extends Component {
     }
 
    // want to save updated recipe
-    saveUpdate = (props) => {
-        this.setState({
-            edit: false,
-        })
-    }
+    // saveUpdate = (props) => {
+    //     this.setState({
+    //         edit: false,
+    //     })
+    // }
 
 
     changeView = () => {
