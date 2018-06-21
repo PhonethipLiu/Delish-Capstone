@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
-import '../../index.css'
+import '../../index.css';
+import 'semantic-ui-css/semantic.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 /**
  * RecipeForm should appear when user clicks on the create recipe button

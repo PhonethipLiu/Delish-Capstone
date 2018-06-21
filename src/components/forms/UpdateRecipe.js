@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Form, Input, Button } from 'semantic-ui-react';
-import '../../index.css'
+import '../../index.css';
+import 'semantic-ui-css/semantic.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 /**
  * UpdateRecipe should appear when user clicks on the edit fields link
@@ -41,7 +43,8 @@ export default class UpdateRecipe extends Component{
     const serving = this.state.fields.serving;
     const tags = this.state.fields.tags;
     const notes = this.state.fields.notes;
-    this.props.saveUpdate(category, subcategory, title, image, source, instruction, snapshot, status, rating, level, serving, tags, notes);
+   
+    this.props.saveUpdate();
 
     this.setState({
         fields: {

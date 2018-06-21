@@ -7,22 +7,18 @@ function setErrorMsg(error) {
   }
 }
 
-class Register extends Component {
+class SignUp extends Component {
 
-    constructor(props){
-        super(props);
-
-        this.state = { 
+    state = { 
             registerError: null 
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+       
   
   handleSubmit = (e) => {
     e.preventDefault()
     auth(this.email.value, this.pw.value, this.name.value)
         .then(() => {
-            this.props.changeURL("recipes");
+            this.props.changeURL("user");
         })
         .catch(e => this.setState(setErrorMsg(e)))
       
@@ -60,4 +56,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default SignUp;

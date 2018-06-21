@@ -1,11 +1,11 @@
 .NavBar-header{
     width: 100%;
-    height: 20%;
+    height: 25%;
     display: inline-block;
 }
 
 .Navbar-logo {
-    height: 2rem;
+    height: 3rem;
 }
 
 NavbarToggler, NavItem  {

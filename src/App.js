@@ -7,7 +7,7 @@ import LandingPage from './LandingPage';
 import logo from './images/Delish-logo-01.svg';
 import Login from './components/Login';
 import { rebase }from './components/config/Fire';
-import { loginWithGoogle, auth, saveUser } from './components/config/AuthHelpers';
+import { loginWithGoogle, auth, saveUser, login } from './components/config/AuthHelpers';
 import 'semantic-ui-css/semantic.min.css';
 
 class App extends Component {
@@ -22,6 +22,7 @@ class App extends Component {
       img: null,
     }
 
+  // firebase loging auth
   componentDidMount() {
   //   this.authListener = rebase.initializedApp.auth().onAuthStateChanged((user) => {
   
@@ -50,8 +51,10 @@ class App extends Component {
   
 
   authenticate = () =>{
-    console.log('App: calling autheticate for google');
+
     // loginWithGoogle();
+    // auth();
+    /* for development set user */
     this.setState({
       authed: true,
     })
@@ -70,7 +73,7 @@ class App extends Component {
               <div className="App-Intro-Btns">
                   {/* <Login className="Btn-Shadow" size='large' role="button" /> */}
                   <Link to='/components/forms/LoginForm'> 
-                    <Button onClick={() => this.authenticate('google')}  className="Btn-Shadow" size='large' role="button">Login </Button>
+                    <Button onClick={() => this.authenticate()}  className="Btn-Shadow" size='large' role="button">Login </Button>
                   </Link>
                   <p className="mt-3"> OR </p>
                   <Link to='/components/forms/SignUp'> 

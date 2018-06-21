@@ -1,8 +1,8 @@
 import { googleProvider, rebase } from './Fire'
 
 
-export function auth (email, pw) {
-  return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw)
+export function auth (email, pw, name) {
+  return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw, name)
     .then((data) => {
       console.log("data is", data);
       saveUser(data);
@@ -35,7 +35,7 @@ export function saveUser (user) {
       email: user.email,
       uid: user.uid,
       name: user.name,
-      img: user.img, 
+      img: user.img,
     })
     .then(() => {
       

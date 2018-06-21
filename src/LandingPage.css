@@ -1,3 +1,37 @@
 .LandingPage-Display {
   margin: 2rem;
 }
+
+.Card-Recipe.card, .Card-RecipeDetails {
+margin-top: 1.6rem;
+}
+
+h5.card-title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+h6.card-subtitle {
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #b08b14;
+}
+
+CardLink {
+  color: #807f7d;
+}
+
+CardLink:hover {
+  color:#b08b14;
+}
+
+.Card-Snapshot {
+  object-fit: contain;
+  width:100%;
+  margin-bottom: 1rem;
+}
+
+a.Btn-Create {
+  color: rgb(211, 113, 9);
+  font-weight: 700;
+}
