@@ -28,8 +28,9 @@ export default class UpdateRecipe extends Component{
         },
         recipeErrors: {},
   }
-
+  
   onFormSubmit = evt => {
+      console.log("What is onFormSubmit ()", this.props);
     const category = this.state.fields.category;
     const subcategory = this.state.fields.subcategory;
     const title = this.state.fields.title;
@@ -233,13 +234,13 @@ export default class UpdateRecipe extends Component{
             >
                Save                       
             </Button>
-            {/* <Button 
+            <Button 
                 size='mini' 
-                color='gray'
+                color='grey'
                 onClick={this.props.cancelUpdate}
             >
                 Cancel                       
-            </Button> */}
+            </Button>
         </Form>
       </div>
     );

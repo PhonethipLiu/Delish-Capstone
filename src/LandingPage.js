@@ -4,13 +4,17 @@ import NavBar from './components/NavBar';
 import RecipeCard from './components/RecipeCard';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import './LandingPage.css';
+import { loginWithGoogle, auth, saveUser, login } from './components/config/AuthHelpers';
+import { rebase }from './components/config/Fire';
 
 
 // Accepts forms as props from App.js
 export default class LandingPage extends Component{
     state = {
         user: this.props.user,
+        cardView: true,
+        // recipes: []
+        /* Use recipes objects below for development */
         recipes: [{
             uid: this.props.user.id,
             category:'Baking',
@@ -58,20 +62,43 @@ export default class LandingPage extends Component{
             serving: '48 cookies',
             tags: 'cookie, oatmeal, oatmeal cookie, baked goods',
             notes: 'They are so easy to make and sell out quickly. Got to recipe for sure.'
-        }],
-        cardView: true
+        }],   
+        loading: true
     }
 
-    // clickCard = () =>{
-    //     this.setState({
-    //         cardView: false,
-    //     })
-    // }
+    saveUpdate = () =>{
+        this.setState({
+            edit: true,
+        })
+    }
 
-    
+    // saveUpdate = () => {
+    //     this.ref = rebase.syncState('items', {
+    //         context: this,
+    //         state: 'recipes',
+    //         asArray: true,
+    //         then() {
+    //           this.setState({ loading: false });
+    //         }
+    //     });
+    //   }
+
+      handleAddRecipe = (newRecipe) => {
+        this.setState({
+            recipes: this.state.recipes.concat([newRecipe])
+          });
+        }
+      
+      handleRemoveRecipe = (index) => {
+          const newRecipeItem = this.state.recipes;
+          newRecipeItem.splice(index, 1);
+          this.setState({
+              recipes: newRecipeItem
+          });
+      }
 
     changeViews = () => {
-        // if(this.state.cardView){
+        if(this.state.cardView){
             return(
                 <div className="LandingPage-Display">
                     <h1>My Recipe Collection</h1>
@@ -79,10 +106,9 @@ export default class LandingPage extends Component{
                     <AllCards recipes={this.state.recipes} 
                     // clickCard={this.clickCard}
                     />
-                
                 </div>
             )
-        // }
+        }
         // else{
         //     return(
         //         <div className="LandingPage-Display">
@@ -94,7 +120,7 @@ export default class LandingPage extends Component{
     }
 
 
-    render(){
+    render() {
         return(
             <div>
                 <NavBar />
@@ -109,11 +135,14 @@ export default class LandingPage extends Component{
             </div>
         )
     }
+
 }
 
 class AllCards extends Component{
     render(){
-    const cards = this.props.recipes.map((recipe, index)=>(
+    const cards = this.props.recipes.map((recipe, index)=>{
+        console.log("what is recipe", recipe);
+        return(
         <RecipeCard
             key={index}
             title = {recipe.title}
@@ -122,10 +151,13 @@ class AllCards extends Component{
             category = {recipe.category}
             subcategory={recipe.subcategory}
             rating = {recipe.rating}
-            clickCard={this.props.clickCard}
+            // saveUpdate={this.saveUpdate}
             recipe= {recipe}
         />
-    ));
+    )
+    });
+    
+
     return(
         <div>
         {cards}
@@ -134,43 +166,3 @@ class AllCards extends Component{
     }
 }
     
-
-
-// Create all of the recipe card items.
-// Accepts props: id, route, title, description
-// class LandingLogin extends Component{
-//   render() {
-//     const forms = this.props.forms.map((form) => (
-//       <ListElement
-//         key={form.id}
-//         id={form.id}
-//         route={form.route}
-//         title={form.title}
-//         description={form.description}
-//       />
-//     ));
-//     return (
-//       <div id='LandingLogin-Options'>
-//         {forms}
-//       </div>
-//     );
-// }
-// }
-
-// // Styling element for the list items
-// class ListElement extends Component{
-//     render(){
-//         return(
-//             <List divided relaxed>
-//                 <List.Item>
-//                     <List.Icon name='wpforms' size='large' verticalAlign='middle' />
-//                     <List.Content>
-//                     <List.Header as={Link} to={this.props.route}>{this.props.title}</List.Header>
-//                     <List.Description as='a'>{this.props.description}</List.Description>
-//                     </List.Content>
-//                 </List.Item>
-//                 <Divider section />
-//             </List>
-//         )
-//     }
-// }

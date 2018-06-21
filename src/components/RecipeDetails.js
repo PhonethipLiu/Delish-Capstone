@@ -16,7 +16,7 @@ const RecipeDetails = (props) => {
           <CardTitle> {props.recipe.title} </CardTitle>
           <CardSubtitle><strong>{props.recipe.category}</strong>&thinsp; / &thinsp;{props.recipe.subcategory}</CardSubtitle>
         </CardBody>
-        <img width="100%" content src={props.recipe.image} alt="Recipe Card image" />
+        <img width="100%" src={props.recipe.image} alt="Recipe Card image" />
         <CardBody>
           <CardText><strong>Source:</strong> {props.recipe.source}</CardText>
           <CardText><strong>Rating:</strong> {props.recipe.rating}&thinsp; / &thinsp;Status: {props.recipe.status}</CardText>

@@ -34,8 +34,6 @@ export function saveUser (user) {
     .set({
       email: user.email,
       uid: user.uid,
-      name: user.name,
-      img: user.img,
     })
     .then(() => {
       
