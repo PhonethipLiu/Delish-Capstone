@@ -116,7 +116,7 @@ export default class LandingPage extends Component{
             return(
                 <div className="LandingPage-Display">
                     <h1>My Recipe Collection</h1>
-                    <a className="Btn-Create" onClick={this.openCreateRecipe()} >+ Create New Recipe</a>
+                    <a className="Btn-Create" onClick={this.openCreateRecipe} >+ Create New Recipe</a>
                     {/* <AllCards recipes={this.state.recipes}  */}
                     />
                 </div>
