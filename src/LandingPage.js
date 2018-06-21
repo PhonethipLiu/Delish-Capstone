@@ -65,7 +65,9 @@ export default class LandingPage extends Component{
         //     tags: 'cookie, oatmeal, oatmeal cookie, baked goods',
         //     notes: 'They are so easy to make and sell out quickly. Got to recipe for sure.'
         // }],   
-        loading: true
+        loading: true,
+        
+    
     }
   
 
@@ -75,14 +77,11 @@ export default class LandingPage extends Component{
     //     })
     // }
 
-    // openCreateRecipe = () => {
-    //     render ()
-    //     return (
-    //         <div className="LandingPage-Display">
-    //         <RecipeForm saveUpdate={this.saveUpdate()}/>
-    //         <div>
-    //     )
-    // }
+    openCreateRecipe = () => {
+        this.setState({
+            cardView: false,
+        })
+    }
 
     saveUpdate = () => {
         this.ref = rebase.syncState('items', {
@@ -92,7 +91,7 @@ export default class LandingPage extends Component{
             then() {
               this.setState({ loading: false });
             }
-        });
+        })
       }
 
       handleAddRecipe = (newRecipe) => {
@@ -111,14 +110,14 @@ export default class LandingPage extends Component{
 
     changeViews = () => {
 
-        if(this.state.recipes){
+        if(this.state.cardView){
             
             return(
                 <div className="LandingPage-Display">
                     <h1>My Recipe Collection</h1>
-                    <a className="Btn-Create" onClick={this.openCreateRecipe} >+ Create New Recipe</a>
-                    {/* <AllCards recipes={this.state.recipes}  */}
-                    />
+                    <a className="Btn-Create" onClick={this.openCreateRecipe}> + Create New Recipe </a>
+                    <AllCards recipes={this.state.recipes} />
+                   
                 </div>
             )
         }
@@ -126,8 +125,8 @@ export default class LandingPage extends Component{
             return(
                 <div className="LandingPage-Display">
                         <h1>My Recipe Collection</h1>
-                        <a className="Btn-Create" onClick={this.openCreateRecipe()} >+ Create New Recipe</a>
-                        <AllCards recipes={this.state.recipes} saveUpdate={this.saveUpdate()}} 
+                        <a className="Btn-Create" onClick={this.openCreateRecipe} >+ Create New Recipe</a>
+                        <RecipeForm saveUpdate={this.saveUpdate} 
                         />
                      </div>
             )
