@@ -6,7 +6,7 @@ import LandingPage from './LandingPage';
 import logo from './images/Delish-logo-01.svg';
 import LoginForm from './components/forms/LoginForm';
 import { rebase }from './components/config/Fire';
-import { loginWithGoogle, auth, saveUser, login } from './components/config/AuthHelpers';
+import { loginWithGoogle, auth, saveUser, login, logout } from './components/config/AuthHelpers';
 import 'semantic-ui-css/semantic.min.css';
 
 
@@ -14,80 +14,98 @@ class App extends Component {
   state = {
       authed: false,
       loading: true,
-      // user: null,
+      user: null,
       /* Use for developement */
-      user: {
-        id: 1,
-        name: "Phil",
-        email: "this@that.com",
-      },
+      // user: {
+      //   id: 1,
+      //   name: "Phil",
+      //   email: "this@that.com",
+      // },
     }
 
   // firebase loging auth
   // componentDidMount = ()=> {
-  //   authListener = ()=> {
-  //     rebase.initializedApp.auth().onAuthStateChanged((user) => {
+    authListener = ()=> {
+      rebase.initializedApp.auth().onAuthStateChanged((user) => {
   
-  //     if (user) {
-  //       this.setState({
-  //         authed: true,
-  //         loading: false,
-  //         uid: user.uid,
-  //       });
+      if (user) {
+        this.setState({
+          authed: true,
+          loading: false,
+          user: user,
+        });
         
-  //       //get DB stuff for user here
-  //     } else {
-  //       this.setState({
-  //         authed: false,
-  //         loading: false,
-  //         uid: null,
-  //       });
-  //       // this.auth();
-  //     }
-  //   })
-  // }
+        //get DB stuff for user here
+      } else {
+        this.setState({
+          authed: false,
+          loading: false,
+          user: null,
+        });
+        // this.auth();
+      }
+    })
+  }
 
-  // componentWillMount =()=>{
-  //   this.authListener()
-  // }
+
+  componentWillMount =()=>{
+    this.authListener()
+  }
   
   /* Firebase rebase */
 
   
 
-   auth = (email, pw) => {
-    return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw)
-      .then((data) => {
-        console.log("data is", data);
-        this.saveUser(data);
-      })
-  }
+  //  auth = (email, pw) => {
+  //   return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw)
+  //     .then((data) => {
+  //       console.log("data is", data);
+  //       this.saveUser(data);
+  //     })
+  // }
 
-  logout = () => {
-    return rebase.initializedApp.auth().signOut()
-  }
+  // logout = () => {
+  //   return rebase.initializedApp.auth().signOut()
+  // }
   
-  login = (email, pw) => {
-    return rebase.initializedApp.auth().signInWithEmailAndPassword(email, pw)
-  }
+  // login = (email, pw) => {
+  //   return rebase.initializedApp.auth().signInWithEmailAndPassword(email, pw)
+  // }
   
 
   authenticate = () =>{
-    // loginWithGoogle()
+    loginWithGoogle()
   
     // this.auth();
     /* for development set user */
-    this.setState({
-      authed: true,
-    })
+    // this.setState({
+    //   authed: true,
+    // })
   }
 
+ // register = () =>{
+  //   this.authListener()
+  // }
+
+signOut = () => {
+  auth.logout()
+  .then(() => {
+    this.setState ({
+      user: null,
+    });
+  });
+}
+
   changeViews = () => {
-    if(this.state.user){
+    console.log("what is changeViews state", this.state);
+
+    if(this.state.authed){
+      console.log("what is state?", this.state);
       return(
           <LandingPage user={this.state.user}/>
       )
     }else{
+      console.log("changeViews: Else state");
       return(
         <section className="App-background">
           <img src={logo} className="App-logo" alt="logo" />
@@ -97,19 +115,17 @@ class App extends Component {
                   <Link to='/components/forms/LoginForm'> 
                     <Button onClick={() => this.authenticate('google')}className="Btn-Shadow" size='large' role="button">Login </Button>
                   </Link>
-                  {/* <p className="mt-3"> OR </p>
+                  <p className="mt-3"> OR </p>
                   <Link to='/components/forms/SignUp'> 
-                  <Button onClick={() => this.register('user')} className="Btn-Shadow"  size='large' role="button"> Sign-Up</Button>
-                  </Link> */}
+                  <Button onClick={() => this.signOut('user')} className="Btn-Shadow"  size='large' role="button"> Logout</Button>
+                  </Link>
               </div>
           </section>
       )
     }
   }
 
-  register = () =>{
-    this.authListener()
-  }
+ 
 
   render() {
 

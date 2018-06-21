@@ -5,18 +5,25 @@ import delish from '../images/Delish-logo-01.svg';
 import './NavBar.css';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import { loginWithGoogle, auth, saveUser, login, logout } from './config/AuthHelpers';
 
 export default class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
+  state = {
       isOpen: false
     };
+  
+
+  signOut = () => {
+    console.log("are we signing out?");
+    logout()
+    .then(() => {
+      this.setState ({
+        user: null,
+      });
+    });
   }
-  toggle() {
+
+  toggle = () =>{
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -39,7 +46,7 @@ export default class NavBar extends React.Component {
                 <NavLink to="/components/forms/RecipeForm/">Create Recipe</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/components/LandingPage/">Logout</NavLink>
+                <NavLink to="/components/LandingPage/" onClick={() => this.signOut()} >Logout</NavLink>
               </NavItem>
               
             </Nav>

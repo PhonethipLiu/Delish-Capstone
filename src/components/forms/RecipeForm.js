@@ -235,7 +235,7 @@ state = {
             </Button>
             <Button 
                 size='mini' 
-                color='gray'
+                color='grey'
                 onClick={this.props.cancelUpdate}
             >
                 Cancel                       
