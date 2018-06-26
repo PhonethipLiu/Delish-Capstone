@@ -66,8 +66,6 @@ export default class LandingPage extends Component{
         //     notes: 'They are so easy to make and sell out quickly. Got to recipe for sure.'
         // }],   
         loading: true,
-        
-    
     }
   
     componentDidMount(){
@@ -144,7 +142,7 @@ export default class LandingPage extends Component{
                 <div className="LandingPage-Display">
                     <h1>My Recipe Collection</h1>
                     <a className="Btn-Create" onClick={this.openCreateRecipe}> + Create New Recipe </a>
-                    <AllCards recipes={this.state.recipes} />
+                    <AllCards recipes={this.state.recipes} saveUpdate={this.saveUpdate}/>
                    
                 </div>
             )
@@ -154,7 +152,7 @@ export default class LandingPage extends Component{
                 <div className="LandingPage-Display">
                         <h1>My Recipe Collection</h1>
                         <a className="Btn-Create" onClick={this.openCreateRecipe} >+ Create New Recipe</a>
-                        <RecipeForm createNewRecipe={this.createNewRecipe} 
+                        <RecipeForm createNewRecipe={this.createNewRecipe} saveUpdate={this.saveUpdate}
                         />
                      </div>
             )
