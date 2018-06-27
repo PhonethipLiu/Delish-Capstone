@@ -9,5 +9,7 @@ const app = firebase.initializeApp({
     storageBucket: "delish-d7b99.appspot.com"
   });
 
+  // const db = firebase.database(app);
+  // export const rebase = Rebase.createClass(db);
   export const rebase = Rebase.createClass(app.database());
   export const googleProvider = new firebase.auth.GoogleAuthProvider();

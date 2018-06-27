@@ -3,13 +3,11 @@ import { Form, Input, Button } from 'semantic-ui-react';
 import '../../index.css';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 /**
  * UpdateRecipe should appear when user clicks on the edit fields link
  */
-
-
 export default class UpdateRecipe extends Component{
     state = {
         fields: {
@@ -32,21 +30,22 @@ export default class UpdateRecipe extends Component{
   
   onFormSubmit = evt => {
       console.log("What is onFormSubmit ()", this.props);
-    const category = this.state.fields.category;
-    const subcategory = this.state.fields.subcategory;
-    const title = this.state.fields.title;
-    const image = this.state.fields.image;
-    const source = this.state.fields.source;
-    const instruction = this.state.fields.instruction;
-    const snapshot = this.state.fields.snapshot;
-    const status = this.state.fields.status;
-    const rating = this.state.fields.rating;
-    const level =  this.state.fields.level;
-    const serving = this.state.fields.serving;
-    const tags = this.state.fields.tags;
-    const notes = this.state.fields.notes;
+    var userRecipe = {}
+    userRecipe.category = this.state.fields.category;
+    userRecipe.subcategory = this.state.fields.subcategory;
+    userRecipe.title = this.state.fields.title;
+    userRecipe.image = this.state.fields.image;
+    userRecipe.source = this.state.fields.source;
+    userRecipe.instruction = this.state.fields.instruction;
+    userRecipe.snapshot = this.state.fields.snapshot;
+    userRecipe.status = this.state.fields.status;
+    userRecipe.rating = this.state.fields.rating;
+    userRecipe.level =  this.state.fields.level;
+    userRecipe.serving = this.state.fields.serving;
+    userRecipe.tags = this.state.fields.tags;
+    userRecipe.notes = this.state.fields.notes;
    
-    this.props.saveUpdate();
+    this.props.saveUpdate(userRecipe);
 
     this.setState({
         fields: {
@@ -71,7 +70,7 @@ export default class UpdateRecipe extends Component{
   onInputChange = evt => {
     const fields= Object.assign({}, this.state.fields);
     fields[evt.target.name] = evt.target.value;
-    this.setState({fields});
+    this.setState({fields: fields});
   }
 
   render() {

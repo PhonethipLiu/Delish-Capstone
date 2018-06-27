@@ -1,8 +1,8 @@
 import { googleProvider, rebase } from './Fire'
 
 
-export function auth (email, pw, name) {
-  return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw, name)
+export function auth (email, pw) {
+  return rebase.initializedApp.auth().createUserWithEmailAndPassword(email, pw)
     .then((data) => {
       console.log("data is", data);
       saveUser(data);
@@ -42,10 +42,11 @@ export function saveUser (user) {
     })
 }
 
+
 export function saveRecipe (user, recipeObj) {
   console.log("save user and recipeObj", user, recipeObj);
   recipeObj.uid = user.uid;
-  return rebase.initializedApp.database().ref(`recipes`)
+  return rebase.initializedApp.database().ref().child(`users/${recipeObj.uid}/recipes`)
     .push(recipeObj)
     .then(() => {
       
@@ -55,10 +56,33 @@ export function saveRecipe (user, recipeObj) {
 
 export function updateRecipe (user, recipeObj) {
   console.log("save user and recipeObj", user, recipeObj);
-  return rebase.initializedApp.database().ref(`recipes`)
-    .push(recipeObj)
+  return rebase.initializedApp.database().ref().child(`recipes`)
+    .update(recipeObj)
     .then(() => {
       
       // return recipeObj;
     })
-}
+} 
+
+
+
+// export function saveRecipe (user, recipeObj) {
+//   console.log("save user and recipeObj", user, recipeObj);
+//   recipeObj.uid = user.uid;
+//   return rebase.initializedApp.database().ref(`recipes`)
+//     .push(recipeObj)
+//     .then(() => {
+      
+//       // return recipeObj;
+//     })
+// }
+
+// export function updateRecipe (user, recipeObj) {
+//   console.log("save user and recipeObj", user, recipeObj);
+//   return rebase.initializedApp.database().ref(`recipes`)
+//     .push(recipeObj)
+//     .then(() => {
+      
+//       // return recipeObj;
+//     })
+// } 

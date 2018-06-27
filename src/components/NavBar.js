@@ -5,7 +5,7 @@ import delish from '../images/Delish-logo-01.svg';
 import './NavBar.css';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { loginWithGoogle, auth, saveUser, login, logout } from './config/AuthHelpers';
+import { logout } from './config/AuthHelpers';
 
 export default class NavBar extends React.Component {
   state = {

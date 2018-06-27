@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import './App.css';
-import { Route, Link } from 'react-router-dom';
+import {/* Route,*/ Link } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import logo from './images/Delish-logo-01.svg';
-import LoginForm from './components/forms/LoginForm';
+// import LoginForm from './components/forms/LoginForm';
 import { rebase }from './components/config/Fire';
-import { loginWithGoogle, auth, saveUser, login, logout } from './components/config/AuthHelpers';
+import { loginWithGoogle , auth/*, saveUser, login, logout*/ } from './components/config/AuthHelpers';
 import 'semantic-ui-css/semantic.min.css';
 
 
@@ -15,12 +15,6 @@ class App extends Component {
       authed: false,
       loading: true,
       user: null,
-      /* Use for developement */
-      // user: {
-      //   id: 1,
-      //   name: "Phil",
-      //   email: "this@that.com",
-      // },
     }
 
   // firebase loging auth

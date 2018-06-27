@@ -35,13 +35,23 @@ class RecipeCard extends Component {
         })
     }
 
+    deleteRecipe = (index, e) =>{
+    // need function to remove from firebase
+        var newRecipeArr = this.state.recipes.concat([]);
+        newRecipeArr.splice(index, 1);
+        this.setState({ 
+            recipes: newRecipeArr,
+        });
+    }
+
    // want to save updated recipe
     saveUpdate = (props) => {
         this.setState({
             edit: false,
+            recipeDetailsOpen: false,
+            updateRecipeFormOpen: false,
         })
     }
-
 
     changeView = () => {
         if(this.state.recipeDetailsOpen){
@@ -50,13 +60,14 @@ class RecipeCard extends Component {
                 recipe={this.props.recipe} 
                 closeRecipeDetails={this.closeRecipeDetails} 
                 clickEditButton={this.clickEditButton}
+                deleteRecipe={this.deleteRecipe} 
                 />)
 
         }else if(this.state.updateRecipeFormOpen){
             return(
                 <UpdateRecipe 
                 recipe={this.props.recipe}
-                // saveUpdate={this.saveUpdate}
+                saveUpdate={this.saveUpdate}
                  />
             )
         }else{
@@ -67,7 +78,7 @@ class RecipeCard extends Component {
                     <CardTitle>{this.props.title}</CardTitle>
                     <CardSubtitle><strong>{this.props.category}</strong>&thinsp; / &thinsp;{this.props.subcategory}</CardSubtitle>
                     </CardBody>
-                    <img width="100%" src={this.props.image} alt="Recipe Card" />
+                    <CardImg width="100%" src={this.props.image} alt="Recipe Card" />
                     <CardBody>
                     <CardText ><strong>Source:</strong> {this.props.source}</CardText>
                     <CardText><strong>Rating:</strong> {this.props.rating}&thinsp; / &thinsp;<strong>Status:</strong> {this.props.status}</CardText>

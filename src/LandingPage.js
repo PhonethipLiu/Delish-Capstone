@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import RecipeCard from './components/RecipeCard';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { saveRecipe, auth, saveUser, login } from './components/config/AuthHelpers';
+import { saveRecipe, updateRecipe } from './components/config/AuthHelpers';
 import { rebase }from './components/config/Fire';
 import RecipeForm from './components/forms/RecipeForm';
 
@@ -16,55 +16,7 @@ export default class LandingPage extends Component{
         user: {},
         cardView: true,
         recipes: [],
-        /* Use recipes objects below for development */
-        // recipes: [{
-        //     uid: this.props.user.id,
-        //     category:'Baking',
-        //     subcategory: 'Bread',
-        //     title: 'Sourdough Bread',
-        //     image: 'https://d2gk7xgygi98cy.cloudfront.net/91-3-large.jpg',
-        //     source: 'https://www.kingarthurflour.com/recipes/rustic-sourdough-bread-recipe',
-        //     instruction: 'See website...',
-        //     snapshot: '',
-        //     status: 'Tested',
-        //     rating: '3',
-        //     level: 'Easy',
-        //     serving: '8',
-        //     tags: 'bread, sourdough bread, baked goods',
-        //     notes: 'It was not as cruchy as I wanted. Will try again and add more time for rising.'
-        // },
-        // {
-        //     uid: this.props.user.id,
-        //     category:'Baking',
-        //     subcategory: 'cookie',
-        //     title: 'French Macaroons',
-        //     image: 'https://www.gourmetfoodworld.com/images/Product/medium/french-almond-macaroons-french-favorites-1S-909.jpg',
-        //     source: 'http://bravetart.com/recipes/macarons',
-        //     instruction: 'See website...',
-        //     snapshot: '',
-        //     status: 'Tested',
-        //     rating: '5',
-        //     level: 'Medium',
-        //     serving: '24 cookies',
-        //     tags: 'French macaroon, macaroon, cookie, almond flour, baked goods',
-        //     notes: 'It turn out beautifully!'
-        // },
-        // {
-        //     uid: this.props.user.id,
-        //     category:'Baking',
-        //     subcategory: 'cookie',
-        //     title: 'Vanishing Oatmeal Raisin Cookies ',
-        //     image: 'http://www.quakeroats.com/images/default-source/RecipeModule/vanishing-oatmeal-raisin-cookies-related-recipe',
-        //     source: 'http://www.geniuskitchen.com/recipe/vanishing-oatmeal-raisin-cookies-3180',
-        //     instruction: 'See website...',
-        //     snapshot: 'http://gbgeeks.com/wp-content/wverrors.php?getimage=aHR0cHM6Ly9pMS53cC5jb20vMy5icC5ibG9nc3BvdC5jb20vLVV2ZUc5VnYyRVZjL1VWU1VzYjJ0YWVJL0FBQUFBQUFBQ0IwL0VZdWN6Z0lLaUNZL3MxNjAwL2Nvb2tpZXJlY2lwZS5KUEc=',
-        //     status: 'Tested',
-        //     rating: '5',
-        //     level: 'Easy',
-        //     serving: '48 cookies',
-        //     tags: 'cookie, oatmeal, oatmeal cookie, baked goods',
-        //     notes: 'They are so easy to make and sell out quickly. Got to recipe for sure.'
-        // }],   
+        
         loading: true,
     }
   
@@ -80,11 +32,6 @@ export default class LandingPage extends Component{
             })
         }
     }
-    // saveUpdate = () =>{
-    //     this.setState({
-    //         edit: true,
-    //     })
-    // }
 
     openCreateRecipe = () => {
         this.setState({
@@ -99,7 +46,7 @@ export default class LandingPage extends Component{
     }
 
     saveUpdate = () => {
-        this.ref = rebase.syncState('items', {
+        this.ref = rebase.syncState('userRecipe', {
             context: this,
             state: 'recipes',
             asArray: true,
@@ -127,6 +74,7 @@ export default class LandingPage extends Component{
         }
       
       handleRemoveRecipe = (index) => {
+          updateRecipe(index);
           const newRecipeItem = this.state.recipes;
           newRecipeItem.splice(index, 1);
           this.setState({
@@ -142,7 +90,7 @@ export default class LandingPage extends Component{
                 <div className="LandingPage-Display">
                     <h1>My Recipe Collection</h1>
                     <a className="Btn-Create" onClick={this.openCreateRecipe}> + Create New Recipe </a>
-                    <AllCards recipes={this.state.recipes} saveUpdate={this.saveUpdate}/>
+                    <AllCards recipes={this.state.recipes} />
                    
                 </div>
             )
@@ -152,7 +100,7 @@ export default class LandingPage extends Component{
                 <div className="LandingPage-Display">
                         <h1>My Recipe Collection</h1>
                         <a className="Btn-Create" onClick={this.openCreateRecipe} >+ Create New Recipe</a>
-                        <RecipeForm createNewRecipe={this.createNewRecipe} saveUpdate={this.saveUpdate}
+                        <RecipeForm createNewRecipe={this.createNewRecipe} 
                         />
                      </div>
             )
