@@ -28,8 +28,8 @@ state = {
   };
   onFormSubmit = (evt, action) => {
     let userObject = {}
-    userObject.catergory = this.state.recipe.category;
-    userObject.subCatergory = this.state.recipe.subcategory;
+    userObject.category = this.state.recipe.category;
+    userObject.subcategory = this.state.recipe.subcategory;
     userObject.title = this.state.recipe.title;
     userObject.image = this.state.recipe.image;
     userObject.source = this.state.recipe.source;
